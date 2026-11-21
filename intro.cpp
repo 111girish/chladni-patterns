@@ -28,8 +28,8 @@ vector<vector<int>> getSigns ( int width, int height, int n, int m){
 
 void printGraph(const vector<vector<int>>& signs){
   
-  for(int i=0; i<signs.size(); i++){
-    for(int j=0; j<signs[0].size(); j++){
+  for(size_t i=0; i<signs.size(); i++){
+    for(size_t j=0; j<signs[0].size(); j++){
       if((i+1 <signs.size() && signs[i+1][j] != signs[i][j]) || (j+1<signs[0].size() && signs[i][j+1] != signs[i][j])){
         cout<<"#";
       } else {
