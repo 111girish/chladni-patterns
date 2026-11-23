@@ -3,6 +3,12 @@
 #include<cmath>
 using namespace std;
 
+struct values {
+  double frequency;
+  int n;
+  int m;
+};
+
 double chladni_formula(double x, double y, int n, int m){
   const double pi = 3.14159265358979;
   double value= cos(m*pi*x)*cos(n*pi*y) - cos(n*pi*x)*cos(m*pi*y);
@@ -40,11 +46,26 @@ void printGraph(const vector<vector<int>>& signs){
 }
 
 int main() {
-  int width = 100, height = 50;
-  vector<vector<int>>signs;
-  int n = 20, m = 25;
-  signs = getSigns(width, height, n , m);
-  printGraph(signs);
+  // int width = 100, height = 50;
+  // vector<vector<int>>signs;
+  // int n = 20, m = 25;
+  // signs = getSigns(width, height, n , m);
+  // printGraph(signs);
+  double maxMode = 4, k = 3;
+  vector <values> val;
+  for(int i=1; i<=maxMode; i++){
+    for(int j=0; j<i; j++){
+      values temp;
+      temp.frequency = k * sqrt(i*i + j*j);
+      temp.m = i;
+      temp.n = j;
+      val.push_back(temp);
+    }
+  }
+
+  for(const auto& i : val){
+    cout<<i.m<<'\t'<<i.n<<'\t'<<i.frequency<<endl;
+  }
   
   return 0;
 }
