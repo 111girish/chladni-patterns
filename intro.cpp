@@ -3,11 +3,25 @@
 #include<cmath>
 using namespace std;
 
-struct values {
+struct modes {
   double frequency;
   int n;
   int m;
 };
+
+vector<modes> retArrOfStr (int maxMode, double k = 3) {
+  vector <modes> val;
+  for(int i=1; i<=maxMode; i++){
+    for(int j=0; j<i; j++){
+      modes temp;
+      temp.frequency = k * sqrt(i*i + j*j);
+      temp.m = i;
+      temp.n = j;
+      val.push_back(temp);
+    }
+  }
+  return val;
+}
 
 double chladni_formula(double x, double y, int n, int m){
   const double pi = 3.14159265358979;
@@ -46,26 +60,14 @@ void printGraph(const vector<vector<int>>& signs){
 }
 
 int main() {
-  // int width = 100, height = 50;
-  // vector<vector<int>>signs;
-  // int n = 20, m = 25;
-  // signs = getSigns(width, height, n , m);
-  // printGraph(signs);
-  double maxMode = 4, k = 3;
-  vector <values> val;
-  for(int i=1; i<=maxMode; i++){
-    for(int j=0; j<i; j++){
-      values temp;
-      temp.frequency = k * sqrt(i*i + j*j);
-      temp.m = i;
-      temp.n = j;
-      val.push_back(temp);
-    }
-  }
+  vector<mode> val = retArrOfStr(10);
 
-  for(const auto& i : val){
-    cout<<i.m<<'\t'<<i.n<<'\t'<<i.frequency<<endl;
-  }
+  int width = 100, height = 50;
+  vector<vector<int>>signs;
+  int n = 20, m = 25;
+  signs = getSigns(width, height, n , m);
+  printGraph(signs);
+  
   
   return 0;
 }
