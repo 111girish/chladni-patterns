@@ -60,14 +60,13 @@ void printGraph(const vector<vector<int>>& signs){
 }
 
 int main() {
-  vector<mode> val = retArrOfStr(10);
-
+  vector<modes> val = retArrOfStr(10);
   int width = 100, height = 50;
   vector<vector<int>>signs;
   int n = 20, m = 25;
   signs = getSigns(width, height, n , m);
   printGraph(signs);
-  
+  //trying to do the freaking search optimization
   
   return 0;
 }
