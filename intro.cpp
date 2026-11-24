@@ -23,6 +23,15 @@ vector<modes> retArrOfStr (int maxMode, double k = 3) {
   return val;
 }
 
+modes getStruct(const vector<modes>& vec, double freq){
+  for(const auto& val: vec ){
+    if(val.frequency == freq){
+      return val;
+    }
+  }
+  return;
+}
+
 double chladni_formula(double x, double y, int n, int m){
   const double pi = 3.14159265358979;
   double value= cos(m*pi*x)*cos(n*pi*y) - cos(n*pi*x)*cos(m*pi*y);
