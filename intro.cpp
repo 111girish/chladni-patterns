@@ -24,8 +24,13 @@ vector<modes> retArrOfStr (int maxMode, double k = 3) {
 }
 
 modes getStruct(const vector<modes>& vec, double freq){
+  double lowest = vec[0].frequency - freq;
+  
   for(const auto& val: vec ){
-    if(val.frequency == freq){
+    if(lowest > (fabs(freq-val.frequency))){
+      lowest = fabs(freq-val.frequency);
+    }
+    if(val.frequency==freq){
       return val;
     }
   }
