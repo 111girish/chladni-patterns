@@ -1,6 +1,8 @@
 #include<iostream>
 #include<vector>
 #include<cmath>
+#include<climits>
+#include<stdexcept>
 using namespace std;
 
 struct modes {
@@ -9,7 +11,7 @@ struct modes {
   int m;
 };
 
-vector<modes> retArrOfStr (int maxMode, double k = 3) {
+vector<modes> createModeTable (int maxMode, double k = 3) {
   vector <modes> val;
   for(int i=1; i<=maxMode; i++){
     for(int j=0; j<i; j++){
@@ -24,16 +26,23 @@ vector<modes> retArrOfStr (int maxMode, double k = 3) {
 }
 
 modes getStruct(const vector<modes>& vec, double freq){
+  if(freq > 100){
+    throw invalid_argument("Your frequency is too high");
+  }
+  if(freq < 3){
+    throw invalid_argument("Your frequency is too low");
+  }
   double lowest = INT_MAX;
   modes temp{
     0,0,0
   };
   for(const auto& val: vec){
+    //always returns the first one it can find;
     if(lowest > fabs(freq-val.frequency)){
       lowest = fabs(freq- val.frequency);
       temp = val;
     }
-  }  
+  }
   return temp;
 }
 
@@ -74,13 +83,16 @@ void printGraph(const vector<vector<int>>& signs){
 }
 
 int main() {
-  vector<modes> val = retArrOfStr(10);
-  int width = 100, height = 50;
-  vector<vector<int>>signs;
-  int n = 20, m = 25;
-  signs = getSigns(width, height, n , m);
-  printGraph(signs);
-  //trying to do the freaking search optimization
-  
-  return 0;
+  try{
+    vector<modes> val = createModeTable(25);
+    int width = 100, height = 50;
+    modes table = getStruct(val, 1);
+    int n= table.n, m = table.m;
+    vector<vector<int>> signs = getSigns(width, height, n , m);
+    printGraph(signs);
+    
+    return 0;
+  } catch (...){
+    cout<<"Error caught"<<endl;
+  }  
 }
