@@ -24,17 +24,17 @@ vector<modes> retArrOfStr (int maxMode, double k = 3) {
 }
 
 modes getStruct(const vector<modes>& vec, double freq){
-  double lowest = vec[0].frequency - freq;
-  
-  for(const auto& val: vec ){
-    if(lowest > (fabs(freq-val.frequency))){
-      lowest = fabs(freq-val.frequency);
+  double lowest = INT_MAX;
+  modes temp{
+    0,0,0
+  };
+  for(const auto& val: vec){
+    if(lowest > fabs(freq-val.frequency)){
+      lowest = fabs(freq- val.frequency);
+      temp = val;
     }
-    if(val.frequency==freq){
-      return val;
-    }
-  }
-  return;
+  }  
+  return temp;
 }
 
 double chladni_formula(double x, double y, int n, int m){
