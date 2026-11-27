@@ -86,7 +86,10 @@ int main() {
   try{
     vector<modes> val = createModeTable(25);
     int width = 100, height = 50;
-    modes table = getStruct(val, 125);
+    double freq = 0.0;
+    cout<<"Enter the value of frequency you want: ";
+    cin>>freq;
+    modes table = getStruct(val, freq);
     int n= table.n, m = table.m;
     vector<vector<int>> signs = getSigns(width, height, n , m);
     printGraph(signs);    
