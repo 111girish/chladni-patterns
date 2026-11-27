@@ -86,13 +86,14 @@ int main() {
   try{
     vector<modes> val = createModeTable(25);
     int width = 100, height = 50;
-    modes table = getStruct(val, 1);
+    modes table = getStruct(val, 125);
     int n= table.n, m = table.m;
     vector<vector<int>> signs = getSigns(width, height, n , m);
-    printGraph(signs);
-    
+    printGraph(signs);    
     return 0;
-  } catch (...){
-    cout<<"Error caught"<<endl;
-  }  
+  } catch (const std::invalid_argument& e) {
+        // Display the error message using .what()
+        std::cerr << "Invalid argument error: " << e.what() << '\n';
+    }
+
 }
