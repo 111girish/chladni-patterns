@@ -5,18 +5,20 @@
 #include<stdexcept>
 using namespace std;
 
+double constant = 3;
+
 struct modes {
   double frequency;
   int n;
   int m;
 };
 
-vector<modes> createModeTable (int maxMode, double k = 3) {
+vector<modes> createModeTable (int maxMode) {
   vector <modes> val;
   for(int i=1; i<=maxMode; i++){
     for(int j=0; j<i; j++){
       modes temp;
-      temp.frequency = k * sqrt(i*i + j*j);
+      temp.frequency = constant * sqrt(i*i + j*j);
       temp.m = i;
       temp.n = j;
       val.push_back(temp);
@@ -29,7 +31,7 @@ modes getStruct(const vector<modes>& vec, double freq){
   if(freq > 100){
     throw invalid_argument("Your frequency is too high");
   }
-  if(freq < 3){
+  if(freq < constant){
     throw invalid_argument("Your frequency is too low");
   }
   double lowest = INT_MAX;
@@ -97,6 +99,7 @@ int main() {
   } catch (const std::invalid_argument& e) {
         // Display the error message using .what()
         std::cerr << "Invalid argument error: " << e.what() << '\n';
+        return -1;
     }
 
 }
